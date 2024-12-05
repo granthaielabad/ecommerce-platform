@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image" href="../assets/favico.png" />
+    <title>Admin Order Management | Student Mart</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .order-table th {
+        text-align: center;
+      }
+
+      .order-status {
+        width: 150px;
+      }
+
+      .order-actions button {
+        margin: 5px;
+      }
+
+      .nav-item {
+        margin-left: 10px; /* Add some spacing between nav items */
+      }
+
+      .navbar .btn {
+        padding: 5px 15px; /* Adjust button padding for consistent look */
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="admin-dashboard.html">Admin Dashboard</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="admin-dashboard.html">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="manage-products.html"
+                >Manage Products</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="manage-users.html">Manage Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="manage-orders.html">Manage Orders</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="reports.html">Reports</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-light" href="#" id="logoutBtn"
+                >Logout</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Order Management Content -->
+    <div class="container my-5">
+      <h1 class="text-center mb-4">Manage Orders</h1>
+
+      <!-- Order Table -->
+      <div class="card">
+        <div class="card-header">
+          <h5>Order List</h5>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered order-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>User</th>
+                <th>Order Total</th>
+                <th>Status</th>
+                <th>Payment Method</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>$150.00</td>
+                <td class="order-status">
+                  <select class="form-select form-select-sm">
+                    <option selected>Pending</option>
+                    <option>Confirmed</option>
+                    <option>Shipped</option>
+                    <option>Delivered</option>
+                    <option>Cancelled</option>
+                  </select>
+                </td>
+                <td>Cash on Delivery</td>
+                <td class="order-actions">
+                  <button class="btn btn-primary btn-sm">View Details</button>
+                  <button class="btn btn-info btn-sm">Update Status</button>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Jane Smith</td>
+                <td>$250.00</td>
+                <td class="order-status">
+                  <select class="form-select form-select-sm">
+                    <option>Pending</option>
+                    <option selected>Confirmed</option>
+                    <option>Shipped</option>
+                    <option>Delivered</option>
+                    <option>Cancelled</option>
+                  </select>
+                </td>
+                <td>Credit Card</td>
+                <td class="order-actions">
+                  <button class="btn btn-primary btn-sm">View Details</button>
+                  <button class="btn btn-info btn-sm">Update Status</button>
+                </td>
+              </tr>
+              <!-- More orders can be added dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Logout Button
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function () {
+          // Remove the token and user data from localStorage
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+
+          // Redirect to the home page
+          window.location.href = "../index.html";
+        });
+    </script>
+  </body>
+</html>

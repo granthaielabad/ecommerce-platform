@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendor Manage Products | Student Mart</title>
+    <link rel="icon" type="image" href="../assets/favico.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f4f4f4;
+      }
+
+      .manage-products-container {
+        max-width: 1200px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .manage-products-header {
+        text-align: center;
+      }
+
+      .table {
+        margin-top: 30px;
+      }
+
+      .form-container {
+        background-color: #f8f9fa;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-container h5 {
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+        color: #333;
+      }
+
+      .back-btn {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .form-group label {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Manage Products Container -->
+    <div class="manage-products-container">
+      <div class="manage-products-header">
+        <h1>Manage Your Products</h1>
+        <p>View, add, and edit your products here.</p>
+      </div>
+
+      <!-- Button to Add Product -->
+      <div class="text-center">
+        <button
+          class="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#addProductModal"
+        >
+          Add New Product
+        </button>
+      </div>
+
+      <!-- Products Table -->
+      <div class="table-responsive mt-4">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="product-table-body">
+            <!-- Product rows will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Add/Edit Product Modal -->
+      <div
+        class="modal fade"
+        id="addProductModal"
+        tabindex="-1"
+        aria-labelledby="addProductModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addProductModalLabel">
+                Add/Edit Product
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form id="add-product-form">
+                <input type="hidden" id="product-id" />
+                <div class="mb-3">
+                  <label for="product-name" class="form-label"
+                    >Product Name</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="product-name"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="product-price" class="form-label">Price</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="product-price"
+                    step="0.01"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="product-stock" class="form-label">Stock</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="product-stock"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="product-description" class="form-label"
+                    >Description</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="product-description"
+                    rows="3"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Save Product
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Back Button -->
+      <div class="text-center">
+        <button class="btn btn-secondary" onclick="window.history.back()">
+          Back
+        </button>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JavaScript -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const vendorId = "675041da28f2d68b08e3785d"; // Replace with the actual logged-in vendor's ID
+        const productsTable = document.querySelector("#product-table-body");
+        const productForm = document.querySelector("#add-product-form");
+        const apiUrl = "/api/products";
+
+        // Fetch products
+        const fetchVendorProducts = async () => {
+          try {
+            const response = await fetch(`${apiUrl}/vendor/${vendorId}`);
+            const { status, data } = await response.json();
+            if (!status) throw new Error("Failed to fetch products");
+
+            productsTable.innerHTML = data
+              .map(
+                (product) => `
+                  <tr>
+                    <td>${product.name}</td>
+                    <td>${product.price}</td>
+                    <td>${product.stock}</td>
+                    <td>
+                      <button class="btn btn-warning btn-sm" onclick="editProduct('${product._id}')">Edit</button>
+                      <button class="btn btn-danger btn-sm" onclick="deleteProduct('${product._id}')">Delete</button>
+                    </td>
+                  </tr>
+                `
+              )
+              .join("");
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        };
+
+        // Handle form submit
+        productForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const productId = document.querySelector("#product-id").value;
+          const productData = {
+            name: document.querySelector("#product-name").value,
+            price: parseFloat(document.querySelector("#product-price").value),
+            stock: parseInt(document.querySelector("#product-stock").value, 10),
+            description: document.querySelector("#product-description").value,
+            vendor: vendorId,
+          };
+
+          const method = productId ? "PUT" : "POST";
+          const endpoint = productId ? `${apiUrl}/${productId}` : apiUrl;
+
+          try {
+            const response = await fetch(endpoint, {
+              method,
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(productData),
+            });
+            const { status } = await response.json();
+            if (!status) throw new Error("Failed to save product");
+
+            alert(productId ? "Product updated!" : "Product added!");
+            productForm.reset();
+            fetchVendorProducts();
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        });
+
+        // Edit Product
+        window.editProduct = (id) => {
+          const row = [...productsTable.querySelectorAll("tr")].find((r) =>
+            r.innerHTML.includes(id)
+          );
+          const [name, price, stock] = row.querySelectorAll("td");
+
+          document.querySelector("#product-id").value = id;
+          document.querySelector("#product-name").value = name.textContent;
+          document.querySelector("#product-price").value = price.textContent;
+          document.querySelector("#product-stock").value = stock.textContent;
+          document.querySelector("#product-description").value = ""; // Fetch actual description if API supports it
+        };
+
+        // Delete Product
+        window.deleteProduct = async (id) => {
+          if (!confirm("Are you sure?")) return;
+          try {
+            const response = await fetch(`${apiUrl}/${id}`, {
+              method: "DELETE",
+            });
+            const { status } = await response.json();
+            if (!status) throw new Error("Failed to delete product");
+
+            alert("Product deleted!");
+            fetchVendorProducts();
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        };
+
+        // Initial fetch
+        fetchVendorProducts();
+      });
+    </script>
+  </body>
+</html>

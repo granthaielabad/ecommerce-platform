@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Mart - Product Details</title>
+    <link rel="icon" type="image" href="assets/favico.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .product-gallery img {
+        max-height: 300px;
+        object-fit: cover;
+        margin-bottom: 15px;
+      }
+
+      .review-section {
+        border-top: 1px solid #ddd;
+        margin-top: 30px;
+        padding-top: 20px;
+      }
+
+      .review-card {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+      }
+
+      .review-rating {
+        color: #f39c12;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Student Mart</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Product Details</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-outline-light" href="#">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+      <div class="row">
+        <!-- Product Gallery and Details -->
+        <div class="col-md-6">
+          <div class="product-gallery">
+            <img
+              src="product1-main.jpg"
+              class="img-fluid"
+              alt="Product Image"
+            />
+            <div class="row">
+              <div class="col-4">
+                <img
+                  src="product1-thumbnail1.jpg"
+                  class="img-fluid"
+                  alt="Product Thumbnail"
+                />
+              </div>
+              <div class="col-4">
+                <img
+                  src="product1-thumbnail2.jpg"
+                  class="img-fluid"
+                  alt="Product Thumbnail"
+                />
+              </div>
+              <div class="col-4">
+                <img
+                  src="product1-thumbnail3.jpg"
+                  class="img-fluid"
+                  alt="Product Thumbnail"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Information -->
+        <div class="col-md-6">
+          <h2>Product Name</h2>
+          <p><strong>₱500.00</strong></p>
+          <p>
+            <strong>Description:</strong> This is a detailed description of the
+            product. It highlights the features, benefits, and uses of the
+            product to provide potential buyers with all necessary information.
+          </p>
+
+          <!-- Add to Cart -->
+          <div class="d-flex">
+            <button class="btn btn-primary me-3">Add to Cart</button>
+            <button class="btn btn-success">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Review Section -->
+      <div class="review-section">
+        <h3>Customer Reviews</h3>
+        <div class="review-card">
+          <div class="d-flex justify-content-between">
+            <div><strong>John Doe</strong></div>
+            <div class="review-rating">★★★★☆</div>
+          </div>
+          <p>
+            This product is amazing! The quality is top-notch, and I love how it
+            looks in my home.
+          </p>
+        </div>
+        <div class="review-card">
+          <div class="d-flex justify-content-between">
+            <div><strong>Jane Smith</strong></div>
+            <div class="review-rating">★★★☆☆</div>
+          </div>
+          <p>
+            The product is good, but I expected a higher quality for the price.
+            Still, it's decent.
+          </p>
+        </div>
+
+        <!-- Add a Review -->
+        <h4>Add Your Review</h4>
+        <form>
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            <select class="form-select" id="rating">
+              <option value="5">5 Stars</option>
+              <option value="4">4 Stars</option>
+              <option value="3">3 Stars</option>
+              <option value="2">2 Stars</option>
+              <option value="1">1 Star</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="reviewText" class="form-label">Your Review</label>
+            <textarea
+              class="form-control"
+              id="reviewText"
+              rows="3"
+              placeholder="Write your review here..."
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Review</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container text-center">
+        <p>&copy; 2024 Student Mart. All Rights Reserved.</p>
+        <a href="privacy.html">Privacy Policy</a> |
+        <a href="terms.html">Terms of Service</a> |
+        <a href="about.html">About</a>
+        |
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Reports</title>
+  <link rel="icon" type="image" href="assets/favico.png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f4f4f4;
+    }
+    .report-container {
+      max-width: 1200px;
+      margin: 50px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .report-header {
+      text-align: center;
+    }
+    .report-header h1 {
+      font-size: 2.5rem;
+      color: #333;
+    }
+    .report-header p {
+      font-size: 1.25rem;
+      color: #555;
+    }
+    .back-btn {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .report-section {
+      margin-top: 40px;
+    }
+    .report-card {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .report-card h5 {
+      font-size: 1.5rem;
+      color: #333;
+    }
+    .report-card p {
+      font-size: 1.25rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Report Container -->
+  <div class="report-container">
+    <div class="report-header">
+      <h1>Admin Reports</h1>
+      <p>View key statistics about the platform's performance and activities.</p>
+    </div>
+
+    <!-- Report Sections -->
+    <div class="report-section">
+      <h2>User Activity</h2>
+      <div class="row">
+        <!-- Users Registered -->
+        <div class="col-md-4">
+          <div class="report-card">
+            <h5>Total Users</h5>
+            <p id="total-users">Loading...</p>
+          </div>
+        </div>
+        <!-- Active Users -->
+        <div class="col-md-4">
+          <div class="report-card">
+            <h5>Active Users</h5>
+            <p id="active-users">Loading...</p>
+          </div>
+        </div>
+        <!-- Vendors Registered -->
+        <div class="col-md-4">
+          <div class="report-card">
+            <h5>Total Vendors</h5>
+            <p id="total-vendors">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <h2>Sales & Transactions</h2>
+      <div class="row">
+        <!-- Total Sales -->
+        <div class="col-md-4">
+          <div class="report-card">
+            <h5>Total Sales</h5>
+            <p id="total-sales">Loading...</p>
+          </div>
+        </div>
+        <!-- Pending Orders -->
+        <div class="col-md-4">
+          <div class="report-card">
+            <h5>Pending Orders</h5>
+            <p id="pending-orders">Loading...</p>
+          </div>
+        </div>
+        <!-- Completed Orders -->
+        <div class="col-md-4">
+          <div class="report-card">
+            <h5>Completed Orders</h5>
+            <p id="completed-orders">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="report-section">
+      <h2>Vendor Performance</h2>
+      <div class="row">
+        <!-- Top Vendor -->
+        <div class="col-md-6">
+          <div class="report-card">
+            <h5>Top Vendor</h5>
+            <p id="top-vendor">Loading...</p>
+          </div>
+        </div>
+        <!-- Vendor with Most Products -->
+        <div class="col-md-6">
+          <div class="report-card">
+            <h5>Vendor with Most Products</h5>
+            <p id="vendor-most-products">Loading...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-btn">
+      <button class="btn btn-secondary" onclick="window.history.back()">Back</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Optional JavaScript for data loading via AJAX -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async function () {
+      try {
+        // Example: Fetching data from the server for the reports
+        const response = await fetch('http://localhost:9000/api/admin/reports');
+        const data = await response.json();
+
+        if (response.ok) {
+          // Populate report data
+          document.getElementById('total-users').textContent = data.totalUsers;
+          document.getElementById('active-users').textContent = data.activeUsers;
+          document.getElementById('total-vendors').textContent = data.totalVendors;
+          document.getElementById('total-sales').textContent = data.totalSales;
+          document.getElementById('pending-orders').textContent = data.pendingOrders;
+          document.getElementById('completed-orders').textContent = data.completedOrders;
+          document.getElementById('top-vendor').textContent = data.topVendor.name;
+          document.getElementById('vendor-most-products').textContent = data.vendorMostProducts.name;
+        } else {
+          alert('Error fetching report data.');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while fetching the report data.');
+      }
+    });
+  </script>
+</body>
+</html>

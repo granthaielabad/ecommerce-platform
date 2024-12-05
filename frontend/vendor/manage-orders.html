@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vendor Manage Orders | Student Mart</title>
+    <link rel="icon" type="image" href="../assets/favico.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-color: #f4f4f4;
+      }
+
+      .manage-orders-container {
+        max-width: 1200px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .manage-orders-header {
+        text-align: center;
+      }
+
+      .table {
+        margin-top: 30px;
+      }
+
+      .back-btn {
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      .form-group label {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Manage Orders Container -->
+    <div class="manage-orders-container">
+      <div class="manage-orders-header">
+        <h1>Manage Your Orders</h1>
+        <p>View and manage orders placed by customers.</p>
+      </div>
+
+      <!-- Orders Table -->
+      <div class="table-responsive mt-4">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer Name</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="order-table-body">
+            <!-- Order rows will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Back Button -->
+      <div class="back-btn">
+        <button class="btn btn-secondary" onclick="window.history.back()">
+          Back
+        </button>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user || user.role !== "vendor") {
+          // If the user is not logged in or not a vendor, redirect to the home page
+          window.location.href = "../index.html";
+        }
+      });
+    </script>
+  </body>
+</html>

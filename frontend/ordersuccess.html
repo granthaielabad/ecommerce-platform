@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Mart - Order Confirmation</title>
+    <link rel="icon" type="image" href="assets/favico.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .thank-you-message {
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .thank-you-message h1 {
+        font-size: 3rem;
+        color: #28a745;
+      }
+
+      .order-details {
+        margin-top: 30px;
+      }
+
+      .order-summary {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 2px solid #ddd;
+      }
+
+      .order-summary .total-price {
+        font-weight: bold;
+      }
+
+      .nav-item {
+        margin-left: 10px; /* Add some spacing between nav items */
+      }
+
+      .navbar .btn {
+        padding: 5px 15px; /* Adjust button padding for consistent look */
+      }
+
+      .footer {
+        background-color: #343a40;
+        color: white;
+        padding: 20px 0;
+      }
+
+      .footer a {
+        color: #adb5bd;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        color: white;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">Student Mart</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Cart</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+            <li class="nav-item">
+              <a class="btn btn-outline-light" href="#">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+      <div class="thank-you-message">
+        <h1>Thank You for Your Order!</h1>
+        <p>Your order has been successfully placed.</p>
+      </div>
+
+      <div class="order-details">
+        <h3>Order Details</h3>
+        <p>Order ID: #12345</p>
+        <p>Order Date: December 4, 2024</p>
+        <p>Payment Method: Cash on Delivery</p>
+      </div>
+
+      <div class="order-summary">
+        <h4>Order Summary</h4>
+        <div class="d-flex justify-content-between">
+          <span>Item 1:</span>
+          <span>₱500.00</span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span>Item 2:</span>
+          <span>₱1,000.00</span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span>Shipping:</span>
+          <span>₱50.00</span>
+        </div>
+        <div class="d-flex justify-content-between">
+          <span class="total-price">Total:</span>
+          <span class="total-price">₱1,550.00</span>
+        </div>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="index.html" class="btn btn-primary">Continue Shopping</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container text-center">
+        <p>&copy; 2024 Student Mart. All Rights Reserved.</p>
+        <a href="privacy.html">Privacy Policy</a> |
+        <a href="terms.html">Terms of Service</a> |
+        <a href="about.html">About</a>
+        |
+        <a href="contact.html">Contact</a>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
