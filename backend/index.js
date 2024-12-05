@@ -29,7 +29,11 @@ const app = express();
 app.use(helmet());
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://student-mart.netlify.app/",
+  })
+);
 
 // Serve static files from the 'frontend' directory
 app.use(express.static("frontend"));
